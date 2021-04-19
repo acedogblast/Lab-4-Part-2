@@ -187,22 +187,28 @@ function setComment($id) {
 
 function addToCart($id) {
     let email =$.trim($('#email').val()); //gets the user's email
-    $.ajax({
-        url: Url+'AddToCart',
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify({
-            "product_id":$id,
-            "email": email
-        }),
-        contentType: 'text/plain',
-        success: function (data) { //on success
-            alert("Added to Cart")
-        },
-        error: function (data) { //on error, throw an alert
-            alert("Error while fetching data.");
-        }
-    });
+
+    if (email == "") {
+        alert("Please enter your email before adding to cart.");
+    }
+    else {
+        $.ajax({
+            url: Url+'AddToCart',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                "product_id":$id,
+                "email": email
+            }),
+            contentType: 'text/plain',
+            success: function (data) { //on success
+                alert("Added to Cart")
+            },
+            error: function (data) { //on error, throw an alert
+                alert("Error while fetching data.");
+            }
+        });
+    }
 }
 
 function toShoppingCart(){
